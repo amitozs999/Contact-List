@@ -2,9 +2,11 @@ var express = require('express');
 
 var port = 8010;
 
-var app = express();
+
 
 var db=require('./config/mongoose')
+var Contact=require('./models/contact');
+var app = express();
  
 
 app.set('view engine', 'ejs');
@@ -35,10 +37,15 @@ var contactList = [
 
 
 app.get('/', function(req, res){
-    return res.render('home',{
-        title: "Contact List",
-        contact_list: contactList
-    });
+      Contact.find({}).exec(function(err,contacts){
+     if(err){
+          return;
+      }
+       return res.render('home',{
+           title: "Contact List",
+           contact_list: contacts});
+       });
+
 })
 app.post('/create-contact', function(req, res){
     
@@ -58,3 +65,6 @@ app.listen(port, function(err){
     }
     console.log('Yup!My Server is running on Port', port);
 })
+
+
+

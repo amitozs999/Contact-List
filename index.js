@@ -1,8 +1,10 @@
 var express = require('express');
 
-var port = 8000;
+var port = 8010;
 
 var app = express();
+
+var db=require('./config/mongoose')
  
 
 app.set('view engine', 'ejs');
@@ -12,20 +14,20 @@ app.use(bodyparser.urlencoded({
     extended: true
   }));
 
-app.use(express.static('nodeget'));
+app.use(express.static('assets'));
 
 var contactList = [
     {
-        name: "Arpan",
-        phone: "1111111111"
+        name: "Amitoz singh",
+        phone: "1474847"
     },
     {
-        name: "Tony Stark",
-        phone: "1234567890"
+        name: "Honey singh",
+        phone: "378639"
     },
     {
-        name: "Coding Ninjas",
-        phone: "12131321321"
+        name: "drake",
+        phone: "3880"
     }
 ]
 

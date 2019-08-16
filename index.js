@@ -49,15 +49,19 @@ app.get('/', function(req, res){
 })
 app.post('/create-contact', function(req, res){
     
-    // contactList.push({
-        
-    //     name: req.body.name,
-    //     phone: req.body.phone,
-    // })
-    contactList.push(req.body);
-    return res.redirect('/');
+    
+  Contact.create({name:req.body.name,
+                phone:req.body.phone},function(err,newcontact){
+                    if(err)
+                    {
+                        return;
+                    }
+                    return res.redirect('back');
+                });
+
 
 });
+
 
 app.listen(port, function(err){
     if (err) {
@@ -65,6 +69,24 @@ app.listen(port, function(err){
     }
     console.log('Yup!My Server is running on Port', port);
 })
+
+app.get('/delete-contact/', function(req, res){
+    
+    let id = req.query.id;
+    console.log(req.query);
+    console.log(id);
+
+
+    Contact.findByIdAndDelete(id, function(err){
+        if(err){
+           
+            return;
+        }
+        console.log(id);
+        return res.redirect('back');
+    });
+});
+
 
 
 

@@ -22,6 +22,14 @@
                         <p><%= i.name %></p>
                         <p><%= i.phone %></p>
                     </li>
+                    <div >
+                        <a href="/delete-contact/?id=<%= i.id %>">
+                            <p><%= i.id %></p>
+                            delete
+                        </a>
+                    </div>
+                    
+
                     
                 <% } %>
             </ul>
